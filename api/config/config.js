@@ -1,4 +1,5 @@
-require('dotenv').config(); // Carrega as variáveis de ambiente do arquivo .env
+import dotenv from 'dotenv'
+dotenv.config();
 
 module.exports = {
     development: {
