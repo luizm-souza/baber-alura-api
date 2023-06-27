@@ -1,7 +1,5 @@
 const { request } = require('express');
 const { schedule } = require('../models/index');
-const { json } = require('body-parser');
-const { all } = require('..');
 
 class ScheduleController {
 
