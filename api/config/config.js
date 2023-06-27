@@ -7,7 +7,7 @@ module.exports = {
     database: process.env.DB_DATABASE,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    use_env_variable: 'DATABASE_URL',
+    use_env_variable: 'mysql://root:Fofvfm6uEOpSxurpsHus@containers-us-west-201.railway.app:7729/railway',
     dialect: 'mysql'
   }
 };
