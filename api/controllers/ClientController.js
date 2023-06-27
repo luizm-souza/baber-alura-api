@@ -91,7 +91,7 @@ async function comparePwd(pwd, hashPwd) {
 
 async function generateToken(payload) {
   const secretKey = process.env.CHAVE_JWT;
-  const optionsToken = { expiresIn: '60m' };
+  const optionsToken = { expiresIn: '10080m' };
   return jwt.sign(payload, secretKey, optionsToken);
 }
 

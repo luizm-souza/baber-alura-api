@@ -1,5 +1,7 @@
 const { request } = require('express');
 const { schedule } = require('../models/index');
+const { json } = require('body-parser');
+const { all } = require('..');
 
 class ScheduleController {
 
@@ -60,6 +62,44 @@ class ScheduleController {
           {where: {clientId: clientId}}
         )
         return res.status(200).json(allSchedules)
+    } catch (error) {
+        return res.status(500).json(error.message)
+    }
+  }
+
+
+  static async getByemployeesIdSchedules(req, res) {
+    const employeeId = req.params.id
+    console.log(employeeId)
+    try {
+        const allSchedules = await schedule.findAll(
+          {where: {barberId: employeeId}}
+        )
+        const horarios = allSchedules.map((e) => {
+          const dataBanco = e.scheduleTime;
+          var dia = dataBanco.getDate()
+          var mes = dataBanco.getMonth()+1
+          var ano = dataBanco.getFullYear()
+          const diaConvertido = `${dia}/${mes}/${ano}`
+          console.log(diaConvertido)
+
+          var hora = dataBanco.getHours()+4
+          var minuto = dataBanco.getMinutes()
+          const horaConvertida = `${hora}h${minuto}`
+          console.log(horaConvertida)
+          return {
+            id: e.id,
+            realTime: e.scheduleTime,
+            date: diaConvertido,
+            hour: horaConvertida,
+            clientId: e.clientId,
+            barberId: e.barberId,
+            serviceId: e.serviceId,
+            createdAt: e.createdAt,
+            updatedAt: e.updatedAt
+          }
+        })
+        return res.status(200).json(horarios)
     } catch (error) {
         return res.status(500).json(error.message)
     }

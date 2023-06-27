@@ -6,6 +6,7 @@ const router = Router()
 
 router.get('/schedules/', ScheduleController.getSchedules)
 router.get('/schedules/user', passport.authenticate('bearer', { session: false }), ScheduleController.getByclientIdSchedules)
+router.get('/schedules/employee/:id', passport.authenticate('bearer', { session: false }), ScheduleController.getByemployeesIdSchedules)
 router.post('/schedule/', passport.authenticate('bearer', { session: false }), ScheduleController.createSchedule)
 router.delete('/schedule/user/:id', passport.authenticate('bearer', { session: false }), ScheduleController.deleteSchedule)
 
